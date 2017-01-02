@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_mail_draft" model="ir.actions.act_window">
+            <field name="name">Draft</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mail.mail</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="domain">[('state', '=', 'outgoing')]</field>
+            <field name="search_view_id" ref="mail.view_mail_search"/>
+        </record>
+
+        <record id="action_mail_outbox" model="ir.actions.act_window">
+            <field name="name">Outbox</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mail.mail</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="domain">['|',('state', '=', 'exception'),('state', '=', 'cancel')]</field>
+            <field name="search_view_id" ref="mail.view_mail_search"/>
+        </record>
+
+        <record id="action_mail_sent" model="ir.actions.act_window">
+            <field name="name">Sent</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mail.mail</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="domain">['|',('state', '=', 'sent'),('state', '=', 'received')]</field>
+            <field name="search_view_id" ref="mail.view_mail_search"/>
+        </record>
+
+        <menuitem name="Mails" id="menu_email_root"/>
+        <menuitem id="menu_mails" name="Mails" parent="menu_email_root"/>
+
+        <menuitem id="menu_mail_draft" sequence="20" action="action_mail_draft" parent="menu_mails"/>
+        <menuitem id="menu_mail_outbox" sequence="30" action="action_mail_outbox" parent="menu_mails"/>
+        <menuitem id="menu_mail_sent" sequence="40" action="action_mail_sent" parent="menu_mails"/>
+    </data>
+</odoo>
