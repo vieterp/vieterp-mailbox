@@ -35,4 +35,6 @@
     # only loaded in demonstration mode
     'demo': [
     ],
+    'images': ['static/description/icon.png'],
+    'application' : True,
 }
