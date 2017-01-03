@@ -7,9 +7,12 @@
 
     'description': """
         - Sent email from odoo
-        - Receive email from odoo
+        - Receive email from odoo - will be available in Jan 04, 2017
         - Compose email from odoo
         - Choose odoo email template
+
+    - For any bugs or feedback, please send email to sang@vieterp.net
+
     """,
 
     'author': "VietERP / Sang",
