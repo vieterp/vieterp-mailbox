@@ -6,12 +6,28 @@
         Simple Odoo mailbox""",
 
     'description': """
-        - Sent email from odoo
-        - Receive email from odoo - will be available in Jan 04, 2017
-        - Compose email from odoo
-        - Choose odoo email template
+1. Main features:
+    - Sending email from odoo
+    - Receiving email from odoo
+    - Composing email from odoo
+    - Choosing template when composing email
 
-    - For any bugs or feedback, please send email to sang@vieterp.net
+2. Why choose this?
+    - Quickly compose email by using template
+    - Don't need to setup any email client on computer
+    - Can access it from any where
+
+3. Settings:
+    - To receiving email, you should follow below:
+    Step1:
+    <img src="/vieterp_mailbox/static/description/step1.png"/>
+    Step2:
+    <img src="/vieterp_mailbox/static/description/step2.png"/>
+    Step3:
+    <img src="/vieterp_mailbox/static/description/step3.png"/>
+
+4. Support:
+    For any feedback, please send email to info@vieterp.net
 
     """,
 
@@ -32,8 +48,13 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'data/cron.xml',
+        'data/data.xml',
+        'security/record_rules.xml',
+        'security/ir.model.access.csv',
         'views/mail_mail_views.xml',
+        'views/fetchmail_server_views.xml',
+        'views/mail_server_source_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

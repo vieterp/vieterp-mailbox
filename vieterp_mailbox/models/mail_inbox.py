@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from lxml import etree
 from odoo import tools, models, fields, api
+from odoo.tools.translate import _
 
 class vieterp_mail_inbox(models.Model):
     _inherit = 'mail.mail'
     _name = 'mail.inbox'
 
+    fetchmail_server_id = fields.Many2one('fetchmail.server.inbox', "Inbound Mail Server", readonly=True, index=True,
+                                          oldname='server_id')
     template_id = fields.Many2one('mail.template', string='Mail Template', select=True)
     state = fields.Selection([
         ('inbox', 'Inbox'),
@@ -15,6 +18,22 @@ class vieterp_mail_inbox(models.Model):
         ('exception', 'Delivery Failed'),
         ('cancel', 'Cancelled'),
     ], 'Status', readonly=True, copy=False, default='outgoing')
+
+    @api.model
+    def message_new(self, msg_dict, custom_values=None):
+        self = self.with_context(default_user_id=False)
+        mail_data = {
+            'subject': msg_dict.get('subject') or _("No Subject"),
+            'email_from': msg_dict.get('from'),
+            'email_to': msg_dict.get('to'),
+            'email_cc': msg_dict.get('cc'),
+            'partner_id': msg_dict.get('author_id', False),
+            'body_html': msg_dict.get('body', ''),
+            'attachment_ids': msg_dict.get('attachments', []),
+            'state': 'inbox',
+        }
+        result = self.create(mail_data)
+        return result
 
     @api.model
     def fields_view_get(self, view_id=None, view_type=False, toolbar=False, submenu=False):
