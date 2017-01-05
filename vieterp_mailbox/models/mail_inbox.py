@@ -9,7 +9,7 @@ class vieterp_mail_inbox(models.Model):
 
     fetchmail_server_id = fields.Many2one('fetchmail.server.inbox', "Inbound Mail Server", readonly=True, index=True,
                                           oldname='server_id')
-    template_id = fields.Many2one('mail.template', string='Mail Template', select=True)
+    template_id = fields.Many2one('email.template', string='Mail Template', select=True)
     state = fields.Selection([
         ('inbox', 'Inbox'),
         ('outgoing', 'Outgoing'),
