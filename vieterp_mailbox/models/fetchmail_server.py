@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from imaplib import IMAP4, IMAP4_SSL
 from poplib import POP3, POP3_SSL
-from odoo import tools, models, fields, api
+from openerp import tools, models, fields, api
 MAIL_TIMEOUT = 60
 
 class vieterp_fetchmail_server(models.Model):

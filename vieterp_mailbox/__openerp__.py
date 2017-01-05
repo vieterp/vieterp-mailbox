@@ -44,6 +44,7 @@
     'depends': [
         'base',
         'mail',
+        'fetchmail',
     ],
 
     # always loaded
@@ -59,7 +60,9 @@
     # only loaded in demonstration mode
     'demo': [
     ],
-    'images': ['static/description/icon.png'],
+    'images': [
+        'static/description/icon.png'
+    ],
     'installable': True,
     'application': True,
 }
