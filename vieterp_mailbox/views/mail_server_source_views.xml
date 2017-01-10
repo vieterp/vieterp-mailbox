@@ -67,7 +67,7 @@
             action="action_mail_server_source_tree"
             name="Source"
             sequence="14"
-            groups="base.group_no_one"
+            groups="base.group_user"
         />
     </data>
 </odoo>
