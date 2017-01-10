@@ -4,7 +4,7 @@ from odoo import tools, models, fields, api
 from odoo.tools.translate import _
 
 class vieterp_mail_inbox(models.Model):
-    _inherit = 'mail.mail'
+    _inherit = ['mail.mail']
     _name = 'mail.inbox'
 
     fetchmail_server_id = fields.Many2one('fetchmail.server.inbox', "Inbound Mail Server", readonly=True, index=True,
@@ -35,19 +35,31 @@ class vieterp_mail_inbox(models.Model):
         result = self.create(mail_data)
         return result
 
-    @api.model
-    def fields_view_get(self, view_id=None, view_type=False, toolbar=False, submenu=False):
-        context = self._context
-        result = super(vieterp_mail_inbox, self).fields_view_get(view_id, view_type, toolbar, submenu)
-        if view_type == 'form':
-            current_id = context.get('active_id', False)
-            my_state = self.browse(current_id).state
-            if my_state in ['inbox', 'outgoing']:
-                doc = etree.XML(result['arch'])
-                for node in doc.xpath('//form'):
-                    node.set('edit', 'true')
-                result['arch'] = etree.tostring(doc)
-        return result
+    @api.multi
+    @api.returns('mail.message', lambda value: value.id)
+    def message_post(self, subtype=None, **kwargs):
+        message_data = {
+            'subject': kwargs.get('subject'),
+            'date': kwargs.get('date'),
+            'body': kwargs.get('body'),
+            'email_from': kwargs.get('email_from'),
+            'reply_to': kwargs.get('email_from'),
+        }
+        return self.env['mail.message'].create(message_data)
+
+    # @api.model
+    # def fields_view_get(self, view_id=None, view_type=False, toolbar=False, submenu=False):
+    #     context = self._context
+    #     result = super(vieterp_mail_inbox, self).fields_view_get(view_id, view_type, toolbar, submenu)
+    #     if view_type == 'form':
+    #         current_id = context.get('active_id', False)
+    #         my_state = self.browse(current_id).state
+    #         if my_state in ['inbox', 'outgoing']:
+    #             doc = etree.XML(result['arch'])
+    #             for node in doc.xpath('//form'):
+    #                 node.set('edit', 'true')
+    #             result['arch'] = etree.tostring(doc)
+    #     return result
 
     @api.onchange('template_id')  # if template are changed, call method
     def check_template_change(self):

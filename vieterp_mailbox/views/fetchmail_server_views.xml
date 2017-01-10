@@ -76,7 +76,7 @@
             action="action_email_server_inbox_tree"
             name="Mail Servers"
             sequence="14"
-            groups="base.group_no_one"
+            groups="base.group_user"
         />
     </data>
 </odoo>

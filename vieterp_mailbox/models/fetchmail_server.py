@@ -22,7 +22,7 @@ class vieterp_fetchmail_server(models.Model):
     @api.multi
     def fetch_mail(self):
         result = super(vieterp_fetchmail_server, self).fetch_mail()
-        return result
+        return True
 
     @api.multi
     def connect(self):
