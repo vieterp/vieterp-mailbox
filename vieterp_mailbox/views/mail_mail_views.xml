@@ -139,9 +139,9 @@
         <menuitem name="Mails" id="menu_email_root"/>
         <menuitem id="menu_mails" name="Mails" parent="menu_email_root"/>
 
-        <menuitem id="menu_mail_inbox" sequence="10" action="action_mail_inbox" parent="menu_mails"/>
-        <menuitem id="menu_mail_draft" sequence="20" action="action_mail_draft" parent="menu_mails"/>
-        <menuitem id="menu_mail_outbox" sequence="30" action="action_mail_outbox" parent="menu_mails"/>
-        <menuitem id="menu_mail_sent" sequence="40" action="action_mail_sent" parent="menu_mails"/>
+        <menuitem id="menu_mail_inbox" sequence="10" action="action_mail_inbox" parent="menu_mails" groups="base.group_user"/>
+        <menuitem id="menu_mail_draft" sequence="20" action="action_mail_draft" parent="menu_mails" groups="base.group_user"/>
+        <menuitem id="menu_mail_outbox" sequence="30" action="action_mail_outbox" parent="menu_mails" groups="base.group_user"/>
+        <menuitem id="menu_mail_sent" sequence="40" action="action_mail_sent" parent="menu_mails" groups="base.group_user"/>
     </data>
 </openerp>
